@@ -7,7 +7,7 @@ const isvalidURL = require("is-url");
 const mongoose = require("mongoose");
 const fs = require("fs");
 
-const html = fs.readFileSync("./views/output.HTML", "utf-8");
+const html = fs.readFileSync(process.cwd() + "/views/output.HTML", "utf-8");
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
