@@ -134,7 +134,7 @@ app.get("/api/shorturl/:id", async function (req, res) {
         .replace("{{%%LINK / ERROR DEF}}", "Short URL not found")
         .replace(
           "{{%%CORRECTION}}",
-          "Please check that the correct shortened URL is entered"
+          "Please check that the correct shortened URL was entered"
         )
     );
     return;
