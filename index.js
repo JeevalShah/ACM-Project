@@ -7,7 +7,7 @@ const isvalidURL = require("is-url");
 const mongoose = require("mongoose");
 const fs = require("fs");
 
-const html = fs.readFileSync(process.cwd() + "/views/output.HTML", "utf-8");
+const html = fs.readFileSync(process.cwd() + "/views/output.html", "utf-8");
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -98,7 +98,7 @@ app.post("/api/shorturl", async function (req, res) {
   //Creating link
   const link = "https://acmweb9.jeevalshah.repl.co/api/shorturl/" + identifier;
 
-  //Providin response by replacing text in HTML object
+  //Providin response by replacing text in html object
   res.end(
     html
       .replace("{{%%ERROR / SHORTURL STATEMENT}}", "The Shortened URL is")
@@ -140,7 +140,7 @@ app.get("/api/shorturl/:id", async function (req, res) {
   }
 });
 
-//Gets the HTML File for the main page
+//Gets the html File for the main page
 app.get("/", function (req, res) {
   res.sendFile(process.cwd() + "/views/index.html");
 });
