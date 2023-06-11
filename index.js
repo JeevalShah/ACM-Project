@@ -97,7 +97,7 @@ app.post("/api/shorturl", async function (req, res) {
   });
 
   //Creating link
-  const link = "https://acm-project.vercel.app/" + identifier;
+  const link = "https://acm-project.vercel.app/api/shorturl/" + identifier;
 
   //Providin response by replacing text in html object
   res.end(
