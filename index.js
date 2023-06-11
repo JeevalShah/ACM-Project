@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 
 const html = fs.readFileSync(process.cwd() + "/views/output.html", "utf-8");
+const main = fs.readFileSync(process.cwd() + "/views/main.html", "utf-8");
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -142,7 +143,7 @@ app.get("/api/shorturl/:id", async function (req, res) {
 
 //Gets the html File for the main page
 app.get("/", function (req, res) {
-  res.sendFile(process.cwd() + "/views/main.html");
+  res.end(main);
 });
 
 app.listen(port, function () {
