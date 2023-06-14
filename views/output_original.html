@@ -13,8 +13,6 @@
         color: #FFFDD0;
         text-align: center;
         line-height: 1.4em;
-        width: 100%;
-        height: 100%;
     }
     
     main {
@@ -29,7 +27,7 @@
     form {
       margin: 10px auto;
       padding: 20px;
-      max-width: 600px;
+      max-width: 800px;
       text-align: center;
     }
     
@@ -55,25 +53,20 @@
     <title>URL Shortener Microservice</title>
   </head>
 
-  <body">
+  <body background="https://drive.google.com/file/d/1FJ1PDe-lM2w1RNPl37TNPPd0Dfat1dlF/view?usp=sharing">
     <h1>URL Shortener Microservice</h1>
     <main>
       <section>
-        <form action="api/shorturl" method="POST">
-          <fieldset>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
-            <input id="url_input" type="text" name="url" placeholder="https://www.google.com/" />
-            <input type="submit" value="POST URL" />
-          </fieldset>
+        <form>
+            <fieldset>
+                <h2>{{%%ERROR / SHORTURL STATEMENT}}</h2>
+                <p>{{%%LINK / ERROR DEF}}</p>
+                <p>{{%%CORRECTION}}</p>
+              </fieldset>
         </form>
       </section>
     </main>
     <footer>
-      <p>By Jeeval Shah & Tarushi Beria </br>
-        Under the guidance of mentor, Kevin Karia </br>
-        For ACM
-      </p>
     </footer>
   </body>
 </html>
