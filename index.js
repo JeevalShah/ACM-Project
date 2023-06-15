@@ -97,7 +97,7 @@ app.post("/api", async function (req, res) {
   });
 
   //Creating link
-  const link = "https://acm.vercel.app/api/" + identifier;
+  const link = "https://acm-project.vercel.app/api/" + identifier;
 
   //Providin response by replacing text in html object
   res.end(
