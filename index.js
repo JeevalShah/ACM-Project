@@ -43,7 +43,7 @@ const URLSchema = new mongoose.Schema({
 //Creating a model
 const URLModel = mongoose.model("URL", URLSchema);
 
-app.post("/api/shorturl", async function (req, res) {
+app.post("/api", async function (req, res) {
   //Receiving URL from user
   const url = req.body.url;
 
@@ -79,7 +79,7 @@ app.post("/api/shorturl", async function (req, res) {
   } else {
     //Loop runs continuously until it finds an identifier not already stored in DB
     while (true) {
-      identifier = Math.random().toString(36).substring(2, 12);
+      identifier = Math.random().toString(36).substring(2, 8);
       let identifierJSONformat = await URLModel.findOne({
         shorten: identifier,
       });
@@ -97,7 +97,7 @@ app.post("/api/shorturl", async function (req, res) {
   });
 
   //Creating link
-  const link = "https://acm-project.vercel.app/api/shorturl/" + identifier;
+  const link = "https://acm.vercel.app/api/" + identifier;
 
   //Providin response by replacing text in html object
   res.end(
@@ -113,7 +113,7 @@ app.post("/api/shorturl", async function (req, res) {
   }
 });
 
-app.get("/api/shorturl/:id", async function (req, res) {
+app.get("/api/:id", async function (req, res) {
   //Gettting ID
   const id = req.params.id;
 
