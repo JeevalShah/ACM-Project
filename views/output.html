@@ -1,107 +1,77 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <style>
       body {
-        background-image: url("https://st3.depositphotos.com/1954507/12768/v/450/depositphotos_127689974-stock-illustration-vector-night-starry-sky-background.jpg");
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        background-image: url("https://wallpapercave.com/dwp1x/wp4736604.jpg");
         background-repeat: repeat-y;
         background-size: cover;
         font-family: Arial, sans-serif;
-        color: white;
+        font-size: 30px;
+        color: black;
         text-align: center;
         line-height: 1.4em;
-      }
-      
-      p {
-        font-size: 5vh;
-      }
+    }
+    
+    main {
+      padding: 0;
+      margin-top: 40px;
+    }
+    
+    h1 {
+      margin-top: 100px;
+      display:flex;
+    }
+    
+    form {
+      margin: 10px auto;
+      padding: 20px;
+      max-width: 830px;
+      text-align: center;
+    }
 
-      main {
-        padding: 0;
-        margin-top: 8vh;
-      }
-      
-      h1 {
-        font-size: 9vh; 
-        margin: 10vh;
-      }
+    fieldset {
+      border-color: black;
+      border-style: solid;
+    }
+    
+    label {
+      margin-right: 10px;
+    }
 
-      h2{
-        font-size: 5vh; 
-        margin: 4vh;
-      }
-      
-      form {
-        margin: 1vw auto;
-        padding: 2vw;
-        text-align: center;
-        max-width: 80%;
-      }
-      
-      label {
-        font-size: 4.5vh;
-        margin-right: 2vh;
-      }
-      
-      footer {
-        font-size: 5vh;
-      }
-      
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 9vh;
-          margin: 7vh;
-        }
-      }     
-
-      .colorbutton {
-        margin-top: 4vh;
+    .colorbutton {
+        margin-top: 30px;
         display: inline-block;
-        background: #2c87c5;
-        font: bold 2vh lato, arial;
+        background: black;
+        font: bold 15px lato, arial;
         color: #fff;
-        padding: 1.9vh 2vh;
+        padding: 20px 30px;
         border: 0;
         border-radius: 0.625vw;
         text-decoration: none;
       }
-      
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 6vh;
-          margin: 5vh;
-        }
-        
-        label {
-          font-size: 3vh;
-          margin-right: 1vh;
-        }
-        
-        .colorbutton {
-          margin-top: 5vh;
-          font-size: 2vh;
-          padding: 1vh 1.5vh;
-        }
-      }
+ 
     </style>
     <title>URL Shortener Microservice</title>
   </head>
-  
-  <body>
-    <h1>URL Shortener</h1>
+
+  <body background="https://drive.google.com/file/d/1FJ1PDe-lM2w1RNPl37TNPPd0Dfat1dlF/view?usp=sharing">
+    <h1>URL Shortener Microservice</h1>
     <main>
       <section>
         <form>
-          <fieldset>
-            <h2>{{%%ERROR / SHORTURL STATEMENT}}</h2>
-            <p>{{%%LINK / ERROR DEF}}</p>
-            <p>{{%%CORRECTION}}</p>
-          </fieldset>
+            <fieldset>
+                <h2>{{%%ERROR / SHORTURL STATEMENT}}</h2>
+                <p>{{%%LINK / ERROR DEF}}</p>
+                <p>{{%%CORRECTION}}</p>
+              </fieldset>
         </form>
         <a href="https://acm-project.vercel.app/" class="colorbutton">Go Back</a>
       </section>
     </main>
-    <footer>
-    </footer>
   </body>
 </html>
