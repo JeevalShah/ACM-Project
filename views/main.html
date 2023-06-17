@@ -1,64 +1,87 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <style>
       body {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         background-image: url("https://st3.depositphotos.com/1954507/12768/v/450/depositphotos_127689974-stock-illustration-vector-night-starry-sky-background.jpg");
         background-repeat: repeat-y;
         background-size: cover;
         font-family: Arial, sans-serif;
-        font-size: 4.7vh;
         color: white;
         text-align: center;
         line-height: 1.4em;
-    }
-    
-    main {
-      padding: 0;
-      margin-top: 6.25vh;
-    }
-    
-    h1 {
-      font-size: 10vh; 
-      margin: 10vh;
-      display: flex;
-    }
-    
-    form {
-      margin: 0.625vw auto;
-      padding: 1.25vw;
-      text-align: center;
-    }
-    
-    label {
-      font-size: 4vh;
-      margin-right: 1.56vh;
-    }
-    
-    input {
-      padding: 0.78vh;
-    }
-    
-    input[type='text'] {
-      width: 50vw;
-      height: 1.75vw;
-      text-align: center;
-    }
+      }
+      
+      main {
+        padding: 0;
+        margin-top: 8vh;
+      }
+      
+      h1 {
+        font-size: 12vh; 
+        margin: 12vh;
+      }
+      
+      form {
+        margin: 1vw auto;
+        padding: 2vw;
+        text-align: center;
+        max-width: 80%;
+      }
+      
+      label {
+        font-size: 4.5vh;
+        margin-right: 2vh;
+      }
+      
+      input {
+        padding: 1vh;
+      }
+      
+      input[type='text'] {
+        width: 80%;
+        max-width: 100vh;
+        height: 4vh;
+        text-align: center;
+        font-size: 3vh;
+      }
+      
+      input[type='submit'] {
+        margin-top: 10px;
+        font-size: 3vh;
+      }
+      
+      footer {
+        font-size: 5vh;
+      }
 
-    footer{
-      font-size: 3vh;
-    }
- 
+      legend {
+        font-size: 4vh;
+      }
+      
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 9vh;
+          margin: 7vh;
+        }
+        
+        input[type='text'] {
+          width: 80%;
+          max-width: 40vw;
+          height: 25vw;
+          font-size: 4vh;
+        }
+        
+        input[type='submit'] {
+          margin-top: 8.75px;
+          font-size: 4vh;
+        }
+      }
     </style>
     <title>URL Shortener Microservice</title>
   </head>
-
-  <body">
+  
+  <body>
     <h1>URL Shortener Microservice</h1>
     <main>
       <section>
@@ -73,12 +96,11 @@
       </section>
     </main>
     <footer>
-      <p>By Jeeval Shah & Tarushi Beria </br>
-        Under the guidance of mentor, Kevin Karia </br>
-        For ACM</br></br>
-        Attributes</br>
-        Hosting Service: Vercel
-      </p>
+      <p>By Jeeval Shah & Tarushi Beria <br></p>
+      <p> Under the guidance of mentor, Kevin Karia <br></p>
+      <p>For ACM<br><br></p>
+      <p>Attributes<br></p>
+      <p>Hosting Service: Vercel</p>
     </footer>
   </body>
 </html>

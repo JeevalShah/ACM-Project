@@ -1,67 +1,103 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <style>
       body {
-        display:flex;
-        flex-direction: column;
-        align-items: center;
         background-image: url("https://st3.depositphotos.com/1954507/12768/v/450/depositphotos_127689974-stock-illustration-vector-night-starry-sky-background.jpg");
         background-repeat: repeat-y;
         background-size: cover;
         font-family: Arial, sans-serif;
-        font-size: 4vh;
         color: white;
         text-align: center;
         line-height: 1.4em;
-    }
-    
-    h1 {
-      font-size: 10vh; 
-      margin: 10vh;
-      display: flex;
-    }
-    
-    form {
-      margin: 0.5vw auto;
-      padding: 1vw;
-      text-align: center;
-    }
-    
-    label {
-      font-size: 4vh;
-      margin-right: 1.56vh;
-    }
+      }
+      
+      p {
+font-size: 5vh;
+      }
+      main {
+        padding: 0;
+        margin-top: 8vh;
+      }
+      
+      h1 {
+        font-size: 12vh; 
+        margin: 12vh;
+      }
 
-    .colorbutton {
-    margin-top: 4vh;
-    display: inline-block;
-    background: #2c87c5;
-    font: bold 2vh lato,arial;
-    color: #fff;
-    padding: 1.9vh 2vh;
-    border: 0;
-    border-radius: 0.625vw;
-    text-decoration: none;
-  }
- 
+      h2{
+        font-size: 5vh; 
+        margin: 4vh;
+      }
+      
+      form {
+        margin: 1vw auto;
+        padding: 2vw;
+        text-align: center;
+        max-width: 80%;
+      }
+      
+      label {
+        font-size: 4.5vh;
+        margin-right: 2vh;
+      }
+      
+      footer {
+        font-size: 5vh;
+      }
+      
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 9vh;
+          margin: 7vh;
+        }
+      }     
+
+      .colorbutton {
+        margin-top: 4vh;
+        display: inline-block;
+        background: #2c87c5;
+        font: bold 2vh lato, arial;
+        color: #fff;
+        padding: 1.9vh 2vh;
+        border: 0;
+        border-radius: 0.625vw;
+        text-decoration: none;
+      }
+      
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 6vh;
+          margin: 5vh;
+        }
+        
+        label {
+          font-size: 3vh;
+          margin-right: 1vh;
+        }
+        
+        .colorbutton {
+          margin-top: 5vh;
+          font-size: 2vh;
+          padding: 1vh 1.5vh;
+        }
+      }
     </style>
     <title>URL Shortener Microservice</title>
   </head>
-
+  
   <body>
     <h1>URL Shortener Microservice</h1>
     <main>
       <section>
         <form>
-            <fieldset>
-                <h2>{{%%ERROR / SHORTURL STATEMENT}}</h2>
-                <p>{{%%LINK / ERROR DEF}}</p>
-                <p>{{%%CORRECTION}}</p>
-              </fieldset>
+          <fieldset>
+            <h2>{{%%ERROR / SHORTURL STATEMENT}}</h2>
+            <p>{{%%LINK / ERROR DEF}}</p>
+            <p>{{%%CORRECTION}}</p>
+          </fieldset>
         </form>
-        <a href = "https://acm-project.vercel.app/" class="colorbutton">Go Back</a>
+        <a href="https://acm-project.vercel.app/" class="colorbutton">Go Back</a>
       </section>
     </main>
     <footer>
