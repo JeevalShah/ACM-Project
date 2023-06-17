@@ -7,8 +7,8 @@ const isvalidURL = require("is-url");
 const mongoose = require("mongoose");
 const fs = require("fs");
 
-const html = fs.readFileSync(process.cwd() + "/views/output.html", "utf-8");
-const main = fs.readFileSync(process.cwd() + "/views/main.html", "utf-8");
+const html = fs.readFileSync(process.cwd() + "/views/output1.html", "utf-8");
+const main = fs.readFileSync(process.cwd() + "/views/main1.html", "utf-8");
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
