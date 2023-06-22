@@ -63,30 +63,57 @@ app.post("/api", async function (req, res) {
     return;
   }
 
-  // Initialising identifier & checking if the user URL input is in database
+  //Declaring identifier
   let identifier;
-  let urlJSONformat = await URLModel.findOne({ URL: url });
 
   //A variable that will determine whether the model is saved
   let save = true;
 
-  if (urlJSONformat) {
-    //Providing the identifier stored in DB
-    identifier = urlJSONformat["shorten"];
+  //Checking whether a domain has been provided ny user
+  if (!req.body.domain) {
+    //Checking if the user URL input is in database
+    let urlJSONformat = await URLModel.findOne({ URL: url });
 
-    //Since the URL is already in DB, no need to save again
-    save = false;
-  } else {
-    //Loop runs continuously until it finds an identifier not already stored in DB
-    while (true) {
-      identifier = Math.random().toString(36).substring(2, 8);
-      let identifierJSONformat = await URLModel.findOne({
-        shorten: identifier,
-      });
-      //If identifier not in DB, break out of loop
-      if (!identifierJSONformat) {
-        break;
+    if (urlJSONformat) {
+      //Providing the identifier stored in DB
+      identifier = urlJSONformat["shorten"];
+
+      //Since the URL is already in DB, no need to save again
+      save = false;
+    } else {
+      //Loop runs continuously until it finds an identifier not already stored in DB
+      while (true) {
+        identifier = Math.random().toString(36).substring(2, 8);
+        let identifierJSONformat = await URLModel.findOne({
+          shorten: identifier,
+        });
+        //If identifier not in DB, break out of loop
+        if (!identifierJSONformat) {
+          break;
+        }
       }
+    }
+  } else {
+    //Initialising identifier with the domain input by user
+    identifier = req.body.domain;
+
+    //Checks if the domain has already been used
+    let identifierJSONformat = await URLModel.findOne({
+      shorten: identifier,
+    });
+
+    //If the domain is alreasy used, then error page is sent
+    if (identifierJSONformat) {
+      res.end(
+        html
+          .replace("{{%%ERROR / SHORTURL STATEMENT}}", "409 Error!!")
+          .replace(
+            "{{%%LINK / ERROR DEF}}",
+            "The requested domain has already been used"
+          )
+          .replace("{{%%CORRECTION}}", "Please Try Again!!")
+      );
+      return;
     }
   }
 
