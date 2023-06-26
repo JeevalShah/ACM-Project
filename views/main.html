@@ -19,10 +19,6 @@
         line-height: 1.4em;
     }
     
-    main {
-      margin-top: 30px;
-    }
-    
     h1 {
       margin-top: 90px
     }
@@ -48,9 +44,15 @@
     }
 
     input[type='submit'] {
-      width: 100px;
-      height: 40px;
-      text-align: center;
+      margin-top: 30px;
+      display: inline-block;
+      background: black;
+      font: bold 15px lato, arial;
+      color: #fff;
+      padding: 20px 30px;
+      border: 0;
+      border-radius: 0.625vw;
+      text-decoration: none;
     }
 
     input[name="url"] {
@@ -64,7 +66,7 @@
 
     footer{
       font: bold;
-      margin-top: 80px;
+      margin-top: 40px;
       font-size: x-large;
     }
  
@@ -85,7 +87,7 @@
             <label for="custom_domain_input">Custom Domain:</label>
             <input id="custom_domain_input" type="text" name="domain" placeholder="google" />
             </br>
-            <input type="submit" value="POST URL" >       
+            <input type="submit" value="POST URL">       
           </fieldset>
         </form>
       </section>

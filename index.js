@@ -6,19 +6,22 @@ const bodyParser = require("body-parser");
 const isvalidURL = require("is-url");
 const mongoose = require("mongoose");
 const fs = require("fs");
-
-const html = fs.readFileSync(process.cwd() + "/views/output.html", "utf-8");
-const main = fs.readFileSync(process.cwd() + "/views/main.html", "utf-8");
+const ejs = require("ejs");
+const qrcode = require("qrcode");
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
 
+const html = fs.readFileSync(process.cwd() + "/views/error.html", "utf-8");
+const main = fs.readFileSync(process.cwd() + "/views/main.html", "utf-8");
+
+app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const MONGOVALUE = process.env.MONGO_URI;
+app.set('view engine', 'ejs');
 
-app.use("/public", express.static(`${process.cwd()}/public`));
+const MONGOVALUE = process.env.MONGO_URI;
 
 //Connecting with database
 mongoose.connect(MONGOVALUE, {
@@ -135,13 +138,12 @@ app.post("/api", async function (req, res) {
   //Creating link
   const link = "https://acm-project.vercel.app/api/" + identifier;
 
-  //Providin response by replacing text in html object
-  res.end(
-    html
-      .replace("{{%%ERROR / SHORTURL STATEMENT}}", "The Shortened URL is")
-      .replace("{{%%LINK / ERROR DEF}}", link)
-      .replace("{{%%CORRECTION}}", "")
-  );
+  qrcode.toDataURL(link, (err, src) => {
+    res.render("output", {
+      qrcodeimage: src,
+      link_display: link,
+    });
+  })
 
   //If save is true, then the URLModel that was just created in URLstorage is saved to Database
   if (save) {
@@ -175,6 +177,10 @@ app.get("/api/:id", async function (req, res) {
     );
     return;
   }
+});
+
+app.post("/scan", async function (req, res) {
+  console.log(req.params.qrlink)
 });
 
 //Gets the html File for the main page
