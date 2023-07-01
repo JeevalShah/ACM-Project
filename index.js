@@ -55,7 +55,9 @@ app.post("/api", async function (req, res) {
     uses = uses.trim();
     if(!(Number(uses))){
       res.end(main.replace("{{%%LINK / ERROR DEF}}", "Number of uses has to be a digit"));
-    } 
+    } else if (Number(uses) <= 0) {
+      res.end(main.replace("{{%%LINK / ERROR DEF}}", "Number of uses has to be a positive integer"));
+    }
   } else {
     uses = -1;
   }
