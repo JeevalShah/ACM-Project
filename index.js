@@ -169,15 +169,7 @@ app.get("/api/:id", async function (req, res) {
     res.redirect(URL);
   } else {
     // ID was not found and providing response
-    res.end(
-      html
-        .replace("{{%%ERROR / SHORTURL STATEMENT}}", "404 Error!!")
-        .replace("{{%%LINK / ERROR DEF}}", "Short URL not found")
-        .replace(
-          "{{%%CORRECTION}}",
-          "Please check that the correct shortened URL was entered"
-        )
-    );
+    res.end(main.replace("{{%%LINK / ERROR DEF}}", "Short URL not found"));
     return;
   }
 });
