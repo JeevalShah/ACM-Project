@@ -30,11 +30,12 @@
     }
     
     label {
-      margin-right: 10px;
+      padding: 5px;
     }
     
     input {
       padding: 5px;
+      margin: 5px;
     }
     
     input[type='text'] {
@@ -66,8 +67,12 @@
 
     footer{
       font-style: bold;
-      margin-top: 30px;
+      margin-top: 70px;
       font-size: x-large;
+    }
+
+    p.Error{
+      color: red;
     }
  
     </style>
@@ -87,9 +92,13 @@
             <label for="custom_domain_input">Custom Domain:</label>
             <input id="custom_domain_input" type="text" name="domain" placeholder="google" />
             </br>
+            <label for="custom_use_input">Uses permitted:</label>
+            <input id="custom_use_input" type="text" name="use" placeholder="Leave blank if not applicable" />
+            </br>
             <input type="submit" value="POST URL">       
           </fieldset>
         </form>
+        <p class="Error">{{%%LINK / ERROR DEF}}</p>
       </section>
     </main>
     <footer>
