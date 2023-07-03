@@ -35,11 +35,23 @@
     
     input {
       padding: 5px;
-      margin: 5px;
+      margin-bottom: 20px;
     }
     
     input[type='text'] {
       width: 300px;
+      height: 20px;
+      text-align: center;
+    }
+
+    input[type='date'] {
+      width: 120px;
+      height: 20px;
+      text-align: center;
+    }
+
+    input[type='time'] {
+      width: 65px;
       height: 20px;
       text-align: center;
     }
@@ -94,6 +106,13 @@
             </br>
             <label for="custom_use_input">Uses permitted:</label>
             <input id="custom_use_input" type="text" name="use" placeholder="Leave blank if not applicable" />
+            </br>
+            <label for="custom_date_input">Valid Till (Date & Time):</label>
+            <input type="date" id="custom_date_input" name="date_valid">
+            <input type="time" id="custom_time_input" name="time_valid" min="00:00" max="23:59"> 
+            </br>
+            <label>Leave Date & Time blank if not applicable.</br>
+              <b>Note:</b> Time is in 24 hour format</label>
             </br>
             <input type="submit" value="POST URL">       
           </fieldset>
