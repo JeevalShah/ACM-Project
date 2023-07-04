@@ -20,6 +20,8 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+process.env.TZ = 'Asia/Kolkata';
+
 const MONGOVALUE = process.env.MONGO_URI;
 
 // Connecting with database
