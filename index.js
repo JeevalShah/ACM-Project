@@ -125,9 +125,9 @@ app.post("/api", async function (req, res) {
       )
     );
     return;
-  } else if (current_date_for_comparision == date && time < current_time) {
+  } else if (current_date_for_comparision == date && time <= current_time) {
     res.end(
-      main.replace("{{%%LINK / ERROR DEF}}", "Time provided must be in future")
+      main.replace("{{%%LINK / ERROR DEF}}", "Time provided must occur in future")
     );
     return;
   }
