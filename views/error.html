@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Error Page</title>
-
   <style>
+    html {
+      font-size: 62.5%;
+    }
+
     body {
       display: flex;
       flex-direction: column;
@@ -13,48 +16,70 @@
       align-items: center;
       background-image: url("https://media.istockphoto.com/id/1061786950/photo/sky-in-the-pink-and-blue-colors-effect-of-light-pastel-colored-of-sunset-clouds-cloud-on-the.webp?b=1&s=170667a&w=0&k=20&c=NHX4Y9h374Mjp73IolBTVXGJGtqCjjt_Hiq5cAoWcTI=");
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: 100vw 100vh;
       font-family: Arial, sans-serif;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 2.4rem;
       color: black;
       text-align: center;
       line-height: 1.6;
-      padding: 30px;
+      padding: 3rem;
     }
 
     h1 {
-      margin: 5px;
-      font-size: 50px;
+      margin: 1rem;
+      font-size: 5rem;
       color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.5);
     }
 
     form {
-      padding: 20px 20px 1px 20px;
+      padding: 2rem 2rem 0.1rem 2rem;
       text-align: center;
       background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 5px;
+      border-radius: 0.5rem;
     }
 
     fieldset {
       border-color: black;
       border-style: solid;
-      border-radius: 5px;
-      padding: 10px 10px 1px 10px;
-      margin-bottom: 20px;
+      border-radius: 0.5rem;
+      padding: 1rem 1rem 0.1rem 1rem;
+      margin-bottom: 2rem;
     }
 
-    .colorbutton {
-      margin-top: 30px;
+      .colorbutton {
+      margin-top: 3rem;
       display: inline-block;
       background: black;
-      font: bold 15px lato, arial;
+      font: bold 1.5rem lato, arial;
       color: #fff;
-      padding: 20px 30px;
+      padding: 2rem 3rem;
       border: 0;
-      border-radius: 0.625vw;
+      border-radius: 1rem;
       text-decoration: none;
+      }
+
+      p, h2 {
+          margin: 2rem;
+      }
+
+    @media(max-width:998px) {
+      html {
+        font-size: 50%;
+      }
+    }
+
+    @media(max-width:860px) {
+      html {
+        font-size: 40%;
+      }
+    }
+
+    @media(max-width:768px) {
+      html {
+        font-size: 35%;
+      }
     }
   </style>
   </head>
