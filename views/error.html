@@ -6,7 +6,7 @@
   <title>Error Page</title>
   <style>
     html {
-      font-size: 62.5%;
+      font-size: 0.576vw;
     }
 
     body {
@@ -64,21 +64,15 @@
           margin: 2rem;
       }
 
-    @media(max-width:998px) {
-      html {
-        font-size: 50%;
+    @media(orientation:landscape) {
+      body {
+        background-size: cover;
       }
     }
 
-    @media(max-width:860px) {
+    @media(max-width:1200px) {
       html {
-        font-size: 40%;
-      }
-    }
-
-    @media(max-width:768px) {
-      html {
-        font-size: 35%;
+        font-size: 0.9vw;
       }
     }
   </style>
