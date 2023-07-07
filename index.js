@@ -11,9 +11,10 @@ const qrcode = require("qrcode");
 // Basic Configuration
 const port = process.env.PORT || 3000;
 
-const html = fs.readFileSync(process.cwd() + "/views/error.html", "utf-8");
+const html = fs.readFileSync(process.cwd() + "/views/miscellaneous.html", "utf-8");
 const main = fs.readFileSync(process.cwd() + "/views/main.html", "utf-8");
 const output = fs.readFileSync(process.cwd() + "/views/output.html", "utf-8");
+const use = fs.readFileSync(process.cwd() + "/views/use.html", "utf-8");
 
 // Configuring web application with appropriate middleware
 app.use(express.json());
@@ -87,14 +88,7 @@ app.post("/api", async function (req, res) {
   if (req.body.use) {
     uses = req.body.use;
     uses = uses.trim();
-    if (!Number(uses)) {
-      res.end(
-        main.replace(
-          "{{%%LINK / ERROR DEF}}",
-          "Number of uses has to be a digit"
-        )
-      );
-    } else if (Number(uses) <= 0) {
+    if (!Number(uses) || Number(uses) <= 0) {
       res.end(
         main.replace(
           "{{%%LINK / ERROR DEF}}",
@@ -152,7 +146,7 @@ app.post("/api", async function (req, res) {
   } else {
     // If custom domain provided, the string is trimmed & spaces are replaced by dashes
     identifier = req.body.domain;
-    identifier = identifier.trim().replace(" ", "-");
+    identifier = identifier.trim().replace(" ", "-").replace("/", "-");
 
     // Checks if the domain has already been used
     let identifierJSONformat = await URLModel.findOne({
@@ -265,6 +259,49 @@ app.get("/api/:id", async function (req, res) {
       )
   );
   return;
+});
+
+// Gets the use request & provides the corresponding html object
+app.get("/use", async function (req, res) {
+  res.end(use.replace("{{%%LINK / ERROR DEF}}", ""));
+});
+
+app.post("/use", async function (req, res) {
+  // Getting the link in post request & modifying it
+  shorturl = req.body.shorturl;
+  if (shorturl.startsWith("https://acm-project.vercel.app/")) {
+    shorturl = shorturl.replace("https://acm-project.vercel.app/", "");
+
+    // Checking if the identifier is stored in MongoDB
+    const URLjson = await URLModel.findOne({ Shorten: shorturl });
+
+    //If stored in MongoDb, then we check uses
+    if (URLjson) {
+      let uses = URLjson["Uses"];
+      if (uses < 0) {
+        uses = -uses - 1
+        res.end(
+          html
+            .replace("{{%%ERROR / SHORTURL STATEMENT}}", "Used: ")
+            .replace("{{%%LINK / ERROR DEF}}", uses + " times")
+            .replace("{{%%CORRECTION}}", "")
+        );
+      } else if (uses > 0) {
+        res.end(
+          html
+            .replace("{{%%ERROR / SHORTURL STATEMENT}}", "Uses Left:")
+            .replace("{{%%LINK / ERROR DEF}}", uses)
+            .replace("{{%%CORRECTION}}", "")
+        );
+      }
+      
+    } else {
+      res.end(use.replace("{{%%LINK / ERROR DEF}}", "Short URL not found"));
+    }
+    
+  } else {
+    res.end(use.replace("{{%%LINK / ERROR DEF}}", "Invalid Short URL entered"));
+  }
 });
 
 // Gets the html File for the main page
