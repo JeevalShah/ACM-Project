@@ -11,7 +11,10 @@ const qrcode = require("qrcode");
 // Basic Configuration
 const port = process.env.PORT || 3000;
 
-const html = fs.readFileSync(process.cwd() + "/views/miscellaneous.html", "utf-8");
+const html = fs.readFileSync(
+  process.cwd() + "/views/miscellaneous.html",
+  "utf-8"
+);
 const main = fs.readFileSync(process.cwd() + "/views/main.html", "utf-8");
 const output = fs.readFileSync(process.cwd() + "/views/output.html", "utf-8");
 const use = fs.readFileSync(process.cwd() + "/views/use.html", "utf-8");
@@ -21,7 +24,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-process.env.TZ = 'Asia/Kolkata';
+process.env.TZ = "Asia/Kolkata";
 
 const MONGOVALUE = process.env.MONGO_URI;
 
@@ -81,7 +84,7 @@ app.post("/api", async function (req, res) {
     return;
   }
 
-  // Checks if number of uses was provided in Request. 
+  // Checks if number of uses was provided in Request.
   // If not, uses = -1
   // If uses is not a digit, or positive then error is displayed
   let uses;
@@ -123,7 +126,10 @@ app.post("/api", async function (req, res) {
     return;
   } else if (current_date_for_comparision == date && time <= current_time) {
     res.end(
-      main.replace("{{%%LINK / ERROR DEF}}", "Time provided must occur in future")
+      main.replace(
+        "{{%%LINK / ERROR DEF}}",
+        "Time provided must occur in future"
+      )
     );
     return;
   }
@@ -227,7 +233,6 @@ app.get("/api/:id", async function (req, res) {
         time_of_expiration >= current_time) ||
       date_of_expiration > current_date_for_comparision
     ) {
-      
       // If Usesleft is 1, that means the current request will make it 0
       // We do not want to store entries that cannot be accessed anymore, so it is not saved
       if (USESleft != 1) {
@@ -268,18 +273,22 @@ app.get("/use", async function (req, res) {
 
 app.post("/use", async function (req, res) {
   // Getting the link in post request & modifying it
+  // If link is not as per shortened URL, error is given
   shorturl = req.body.shorturl;
-  if (shorturl.startsWith("https://acm-project.vercel.app/")) {
-    shorturl = shorturl.replace("https://acm-project.vercel.app/", "");
+  if (shorturl.startsWith("https://acm-project.vercel.app/api/")) {
+    shorturl = shorturl.replace("https://acm-project.vercel.app/api/", "");
 
     // Checking if the identifier is stored in MongoDB
     const URLjson = await URLModel.findOne({ Shorten: shorturl });
 
-    //If stored in MongoDb, then we check uses
+    // If stored in MongoDb, then we check uses
+    // Else displays an error
     if (URLjson) {
       let uses = URLjson["Uses"];
+
+      // Uses are dealt with according to type
       if (uses < 0) {
-        uses = -uses - 1
+        uses = -uses - 1;
         res.end(
           html
             .replace("{{%%ERROR / SHORTURL STATEMENT}}", "Used: ")
@@ -294,11 +303,9 @@ app.post("/use", async function (req, res) {
             .replace("{{%%CORRECTION}}", "")
         );
       }
-      
     } else {
       res.end(use.replace("{{%%LINK / ERROR DEF}}", "Short URL not found"));
     }
-    
   } else {
     res.end(use.replace("{{%%LINK / ERROR DEF}}", "Invalid Short URL entered"));
   }
@@ -307,6 +314,24 @@ app.post("/use", async function (req, res) {
 // Gets the html File for the main page
 app.get("/", function (req, res) {
   res.end(main.replace("{{%%LINK / ERROR DEF}}", ""));
+});
+
+app.get("/:id", function (req, res) {
+  // To create a Page Not Found Error
+  // api is not get but post
+  // Only use is get, hence the condition
+  const id = req.params.id;
+  if (id != "use") {
+    res.end(
+      html
+        .replace("{{%%ERROR / SHORTURL STATEMENT}}", "404 Error!")
+        .replace("{{%%LINK / ERROR DEF}}", "Page Not Found")
+        .replace(
+          "{{%%CORRECTION}}",
+          "Check the URL you have entered & try again!"
+        )
+    );
+  }
 });
 
 // Displays the current port
