@@ -26,10 +26,32 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 process.env.TZ = "Asia/Kolkata";
 
+// Function which returns current date & time in required format
+function returntime() {
+  // Getting Date & Time of request
+  // current_date_for_comparision & current_time & allow for comparision and checking
+  const dateObject = new Date();
+
+  const current_date = ("0" + dateObject.getDate()).slice(-2);
+  const current_month = ("0" + (dateObject.getMonth() + 1)).slice(-2);
+  const current_year = dateObject.getFullYear();
+
+  const current_date_for_comparision =
+    current_year + "-" + current_month + "-" + current_date;
+
+  const current_hours = ("0" + dateObject.getHours()).slice(-2);
+  const current_minutes = ("0" + dateObject.getMinutes()).slice(-2);
+
+  const current_time = current_hours + ":" + current_minutes;
+  const date_time_array = [current_date_for_comparision, current_time];
+  return date_time_array;
+}
+
 const MONGOVALUE = process.env.MONGO_URI;
 
 // Connecting with database
 mongoose.connect(MONGOVALUE, {
+  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000,
@@ -60,21 +82,8 @@ app.post("/api", async function (req, res) {
   var date = req.body.date_valid;
   var time = req.body.time_valid;
 
-  // Getting Date & Time of request
-  // current_date_for_comparision & current_time & allow for comparision and checking
-  const dateObject = new Date();
-
-  const current_date = ("0" + dateObject.getDate()).slice(-2);
-  const current_month = ("0" + (dateObject.getMonth() + 1)).slice(-2);
-  const current_year = dateObject.getFullYear();
-
-  const current_date_for_comparision =
-    current_year + "-" + current_month + "-" + current_date;
-
-  const current_hours = ("0" + dateObject.getHours()).slice(-2);
-  const current_minutes = ("0" + dateObject.getMinutes()).slice(-2);
-
-  const current_time = current_hours + ":" + current_minutes;
+  // Getting current date & time
+  const [current_date_for_comparision, current_time] = returntime();
 
   // Checking if URL is valid
   if (!isvalidURL(url)) {
@@ -195,22 +204,8 @@ app.get("/api/:id", async function (req, res) {
   // Gettting ID
   const id = req.params.id;
 
-  // Date provided must either be today or else occur sometime in the future
-  // Time can be provided within the 24 Hour Format, however on if the date is the current date
-  // Then, time must be greater than current time
-  const dateObject = new Date();
-
-  const current_date = ("0" + dateObject.getDate()).slice(-2);
-  const current_month = ("0" + (dateObject.getMonth() + 1)).slice(-2);
-  const current_year = dateObject.getFullYear();
-
-  const current_date_for_comparision =
-    current_year + "-" + current_month + "-" + current_date;
-
-  const current_hours = ("0" + dateObject.getHours()).slice(-2);
-  const current_minutes = ("0" + dateObject.getMinutes()).slice(-2);
-
-  const current_time = current_hours + ":" + current_minutes;
+  // Getting current date & time
+  const [current_date_for_comparision, current_time] = returntime();
 
   // Checking if ID in Database
   const URLjson = await URLModel.findOne({ Shorten: id });
