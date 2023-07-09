@@ -329,6 +329,19 @@ app.get("/:id", function (req, res) {
   }
 });
 
+// Creating a not found page, in case something is added by user after /use
+app.get("/use/:id", function (req, res) {
+  res.end(
+    html
+      .replace("{{%%ERROR / SHORTURL STATEMENT}}", "404 Error!")
+      .replace("{{%%LINK / ERROR DEF}}", "Page Not Found")
+      .replace(
+        "{{%%CORRECTION}}",
+        "Check the URL you have entered & try again!"
+      )
+  );
+});
+
 // Displays the current port
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
