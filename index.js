@@ -276,7 +276,7 @@ app.post("/use", async function (req, res) {
     // Checking if the identifier is stored in MongoDB
     const URLjson = await URLModel.findOne({ Shorten: shorturl });
 
-    // If stored in MongoDb, then we check uses
+    // If stored in MongoDb, then we check uses, date & time
     // Else displays an error
     if (URLjson) {
       let uses = URLjson["Uses"];
@@ -285,6 +285,8 @@ app.post("/use", async function (req, res) {
 
       // Getting current date & time
       const [current_date, current_time] = returntime();
+      // Checking if the link is still valid  according to date & time of expiry
+      // Else, it will provide an error
       if (date > current_date || (date == current_date && time > current_time)) {
         // Uses are dealt with according to type
         if (uses < 0) {
