@@ -280,24 +280,33 @@ app.post("/use", async function (req, res) {
     // Else displays an error
     if (URLjson) {
       let uses = URLjson["Uses"];
+      let date = URLjson["Date"];
+      let time = URLjson["Time"];
 
-      // Uses are dealt with according to type
-      if (uses < 0) {
-        uses = -uses - 1;
-        res.end(
-          html
-            .replace("{{%%ERROR / SHORTURL STATEMENT}}", "Used: ")
-            .replace("{{%%LINK / ERROR DEF}}", uses + " times")
-            .replace("{{%%CORRECTION}}", "")
-        );
-      } else if (uses > 0) {
-        res.end(
-          html
-            .replace("{{%%ERROR / SHORTURL STATEMENT}}", "Uses Left:")
-            .replace("{{%%LINK / ERROR DEF}}", uses)
-            .replace("{{%%CORRECTION}}", "")
-        );
+      // Getting current date & time
+      const [current_date, current_time] = returntime();
+      if (date > current_date || (date == current_date && time > current_time)) {
+        // Uses are dealt with according to type
+        if (uses < 0) {
+          uses = -uses - 1;
+          res.end(
+            html
+              .replace("{{%%ERROR / SHORTURL STATEMENT}}", "Used: ")
+              .replace("{{%%LINK / ERROR DEF}}", uses + " times")
+              .replace("{{%%CORRECTION}}", "")
+          );
+        } else if (uses > 0) {
+          res.end(
+            html
+              .replace("{{%%ERROR / SHORTURL STATEMENT}}", "Uses Left:")
+              .replace("{{%%LINK / ERROR DEF}}", uses)
+              .replace("{{%%CORRECTION}}", "")
+          );
+        }
+      } else {
+        res.end(use.replace("{{%%LINK / ERROR DEF}}", "Short URL Expired"));
       }
+        
     } else {
       res.end(use.replace("{{%%LINK / ERROR DEF}}", "Short URL not found"));
     }
