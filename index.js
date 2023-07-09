@@ -287,7 +287,10 @@ app.post("/use", async function (req, res) {
       const [current_date, current_time] = returntime();
       // Checking if the link is still valid  according to date & time of expiry
       // Else, it will provide an error
-      if (date > current_date || (date == current_date && time > current_time)) {
+      if (
+        date > current_date ||
+        (date == current_date && time > current_time)
+      ) {
         // Uses are dealt with according to type
         if (uses < 0) {
           uses = -uses - 1;
@@ -308,7 +311,6 @@ app.post("/use", async function (req, res) {
       } else {
         res.end(use.replace("{{%%LINK / ERROR DEF}}", "Short URL Expired"));
       }
-        
     } else {
       res.end(use.replace("{{%%LINK / ERROR DEF}}", "Short URL not found"));
     }
