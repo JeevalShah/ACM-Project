@@ -161,7 +161,7 @@ app.post("/api", async function (req, res) {
   } else {
     // If custom domain provided, the string is trimmed & spaces are replaced by dashes
     identifier = req.body.domain;
-    identifier = identifier.trim().replace(" ", "-").replace("/", "-");
+    identifier = identifier.trim().replace(" ", "-").replace("/", "-").toLowerCase();
 
     // Checks if the domain has already been used
     let identifierJSONformat = await URLModel.findOne({
